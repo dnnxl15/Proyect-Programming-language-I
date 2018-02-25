@@ -42,7 +42,7 @@ public class ControlLogin
 			Alert alert = new Alert(AlertType.ERROR, "Complete all the fields");
 			alert.showAndWait();
 		}
-		// Falta consultar si existe este username sino tirar un mensaje
+		// FALTA consultar si existe este username sino tirar un mensaje
 		System.out.println(username + password);
 	}
 	
@@ -56,7 +56,8 @@ public class ControlLogin
 		String password = main_txt_signIn_password.getText().toString();
 		String confirmPassword = main_txt_signIn_confirmPassword.getText().toString();
 		
-		// Registrar al archivo y al library.
+		// FALTA
+		// Registrar al archivo y al library. 
 		System.out.println(username + password + lastname + identification + address);
 
 		
