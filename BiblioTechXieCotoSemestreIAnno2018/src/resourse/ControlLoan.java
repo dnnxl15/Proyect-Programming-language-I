@@ -1,5 +1,7 @@
 package resourse;
 
-public class ControlLoan {
+public class ControlLoan 
+{
+	// Class
 
 }
