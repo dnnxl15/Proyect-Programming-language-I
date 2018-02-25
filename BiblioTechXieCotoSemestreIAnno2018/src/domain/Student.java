@@ -2,14 +2,17 @@ package domain;
 
 import java.io.Serializable;
 
-public class Student extends Person implements Serializable
+import library.IConstant;
+
+public class Student extends Person implements Serializable, IConstant
 {
 	private String carrer;
 	private String license;
 	
 	public Student()
 	{
-		
+		carrer = DEFAULT_VALUE_STUDENT_CARRER;
+		license = DEFAULT_VALUE_STUDENT_ID;
 	}
 	
 	public Student(String pName, String pSureName, String pIdentification, String pAddress, String pCarrer, String pLicense)
@@ -22,6 +25,7 @@ public class Student extends Person implements Serializable
 	public String getCarrer() {
 		return carrer;
 	}
+	
 	public void setCarrer(String carrer) {
 		this.carrer = carrer;
 	}
@@ -29,6 +33,7 @@ public class Student extends Person implements Serializable
 	public String getLicense() {
 		return license;
 	}
+	
 	public void setLicense(String license) {
 		this.license = license;
 	}

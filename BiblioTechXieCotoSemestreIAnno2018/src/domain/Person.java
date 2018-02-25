@@ -2,7 +2,9 @@ package domain;
 
 import java.io.Serializable;
 
-public class Person implements Serializable
+import library.IConstant;
+
+public class Person implements Serializable, IConstant
 {
 	private String name;
 	private String sureName;
@@ -11,7 +13,10 @@ public class Person implements Serializable
 	
 	public Person()
 	{
-		
+		name = DEFAULT_VALUE_PERSON_NAME;
+		sureName = DEFAULT_VALUE_PERSON_SURENAME;
+		identification = DEFAULT_VALUE_PERSON_IDENTIFICATION;
+		address = DEFAULT_VALUE_PERSON_ADDRESS;
 	}
 	
 	public Person(String pName, String pSureName, String pIdentification, String pAddress)
@@ -25,6 +30,7 @@ public class Person implements Serializable
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -32,6 +38,7 @@ public class Person implements Serializable
 	public String getSureName() {
 		return sureName;
 	}
+	
 	public void setSureName(String sureName) {
 		this.sureName = sureName;
 	}
@@ -39,6 +46,7 @@ public class Person implements Serializable
 	public String getIdentification() {
 		return identification;
 	}
+	
 	public void setIdentification(String identification) {
 		this.identification = identification;
 	}
@@ -46,6 +54,7 @@ public class Person implements Serializable
 	public String getAddress() {
 		return address;
 	}
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}

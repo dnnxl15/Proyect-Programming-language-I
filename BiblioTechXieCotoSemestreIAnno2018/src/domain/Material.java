@@ -2,7 +2,9 @@ package domain;
 
 import java.sql.Date;
 
-public class Material 
+import library.IConstant;
+
+public class Material implements IConstant
 {
 	private String name;
 	private int totalQuantity;
@@ -12,7 +14,11 @@ public class Material
 	
 	public Material()
 	{
-		
+		name = DEFAULT_VALUE_MATERIAL_NAME;
+		totalQuantity = DEFAULT_VALUE_MATERIAL_TOTAL_QUANTITY;
+		quantityAvailable = DEFAULT_VALUE_MATERIAL_QUANTITY_AVAILABLE;
+		incomingDate = (Date) DEFAULT_VALUE_MATERIAL_DATE;
+		status = DEFAULT_VALUE_MATERIAL_STATUS;
 	}
 	
 	public Material(String pName, int pTotalQuantity, int pQuantityAvailable, Date pIncomingDate, boolean pStatus)
@@ -27,6 +33,7 @@ public class Material
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -34,6 +41,7 @@ public class Material
 	public int getTotalQuantity() {
 		return totalQuantity;
 	}
+	
 	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
@@ -41,6 +49,7 @@ public class Material
 	public int getQuantityAvailable() {
 		return quantityAvailable;
 	}
+	
 	public void setQuantityAvailable(int quantityAvailable) {
 		this.quantityAvailable = quantityAvailable;
 	}
@@ -48,6 +57,7 @@ public class Material
 	public Date getIncomingDate() {
 		return incomingDate;
 	}
+	
 	public void setIncomingDate(Date incomingDate) {
 		this.incomingDate = incomingDate;
 	}
@@ -55,6 +65,7 @@ public class Material
 	public boolean isStatus() {
 		return status;
 	}
+	
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
