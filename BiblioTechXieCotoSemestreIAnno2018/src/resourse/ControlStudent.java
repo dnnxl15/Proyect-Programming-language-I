@@ -62,5 +62,4 @@ public class ControlStudent
 		Stage stage = (Stage) main_btn_hide.getScene().getWindow();
 		stage.setIconified(true);
 	}
-
 }
