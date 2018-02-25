@@ -2,7 +2,9 @@ package domain;
 
 import java.sql.Date;
 
-public class Loan
+import library.IConstant;
+
+public class Loan implements IConstant
 {
 	private Date startDate;
 	private Date endDate;
@@ -11,7 +13,10 @@ public class Loan
 	
 	public Loan()
 	{
-		
+		startDate = (Date) DEFAULT_VALUE_START_DAY;
+		endDate = (Date) DEFAULT_VALUE_END_DAY;
+		student = (Student) DEFAULT_VALUE_OBJECT;
+		administrator = (Administrator) DEFAULT_VALUE_OBJECT;
 	}
 	
 	public Loan(Date pStartDate, Date pEndDate, Student pStudent, Administrator pAdministrator)

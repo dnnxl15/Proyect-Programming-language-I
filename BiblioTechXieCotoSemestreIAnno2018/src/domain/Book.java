@@ -2,7 +2,9 @@ package domain;
 
 import java.sql.Date;
 
-public class Book extends Material
+import library.IConstant;
+
+public class Book extends Material implements IConstant
 {
 	private String type;
 	private String code;
@@ -12,7 +14,11 @@ public class Book extends Material
 	
 	public Book()
 	{
-		
+		type = DEFAULT_VALUE_BOOK_TYPE;
+		code = DEFAULT_VALUE_BOOK_CODE;
+		author = DEFAULT_VALUE_BOOK_AUTHOR;
+		releaseDate = (Date) DEFAULT_VALUE_BOOK_RELEASE_DATE;
+		pageQuantity = DEFAULT_VALUE_BOOK_PAGE_QUANTITY;
 	}
 	
 	public Book(String pName, int pTotalQuantity, int pQuantityAvailable, Date pIncomingDate, boolean pStatus, String pType, String pCode,
