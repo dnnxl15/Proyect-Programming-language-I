@@ -9,7 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ControlStudent 
-{
+{//
 	@FXML private JFXTextField main_txt_registerStudent_name;
 	@FXML private JFXTextField main_txt_registerStudent_lastname;
 	@FXML private JFXTextField main_txt_registerStudent_identification;

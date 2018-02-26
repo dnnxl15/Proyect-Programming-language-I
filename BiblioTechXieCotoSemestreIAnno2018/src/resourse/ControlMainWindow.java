@@ -15,6 +15,7 @@ import library.IConstant;
 
 public class ControlMainWindow implements IConstant
 {
+	//
 	@FXML private JFXButton main_btn_principal_registerStudent;
 	@FXML private JFXButton main_btn_principal_registerMaterial;
 	@FXML private JFXButton main_btn_principal_registerLoan;

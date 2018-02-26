@@ -13,7 +13,7 @@ import file.FileWriter;
 
 public class RecordInformation
 {
-	/* 
+	/*
 	 * Created: 02/24/2018
 	 * Author: Esteban Coto Alfaro
 	 * Description: Create a Student object

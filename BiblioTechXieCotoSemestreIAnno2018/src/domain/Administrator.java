@@ -26,8 +26,8 @@ public class Administrator extends Person implements Serializable, IConstant
 		return username;
 	}
 	
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String pUsername) {
+		this.username = pUsername;
 	}
 	
 	public String getPassword() {

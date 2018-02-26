@@ -18,6 +18,7 @@ import library.IConstant;
 
 public class ControlLogin implements IConstant
 {
+	//
 	@FXML private JFXButton main_btn_signUp_signUp;
 	@FXML private JFXButton main_btn_signUp_hide;
 	@FXML private JFXButton main_btn_signUp_close;
