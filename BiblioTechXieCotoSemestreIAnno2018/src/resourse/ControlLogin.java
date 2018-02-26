@@ -1,15 +1,22 @@
 package resourse;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import library.IConstant;
 
-public class ControlLogin
+public class ControlLogin implements IConstant
 {
 	@FXML private JFXButton main_btn_signUp_signUp;
 	@FXML private JFXButton main_btn_signUp_hide;
@@ -43,6 +50,15 @@ public class ControlLogin
 			alert.showAndWait();
 		}
 		// FALTA consultar si existe este username sino tirar un mensaje
+		// if(username && password existe)
+		//{
+		//		openWindowPrincipal();
+		//}
+		//else{
+		//Alert alert = new Alert(AlertType.ERROR, "User don't exist");
+		//alert.showAndWait();
+		//}
+		
 		System.out.println(username + password);
 	}
 	
@@ -56,11 +72,12 @@ public class ControlLogin
 		String password = main_txt_signIn_password.getText().toString();
 		String confirmPassword = main_txt_signIn_confirmPassword.getText().toString();
 		
+		//--------------------------------------
 		// FALTA
-		// Registrar al archivo y al library. 
+		// Registrar al archivo y al objecto library. 
+		//--------------------------------------
 		System.out.println(username + password + lastname + identification + address);
 
-		
 		if(!password.equals(confirmPassword))
 		{
 			Alert alert = new Alert(AlertType.ERROR, "Password don't match");
@@ -74,6 +91,21 @@ public class ControlLogin
 			alert.showAndWait();
 			return;
 		}
+	}
+	
+	/**
+	 * Method open window principal
+	 * Author: Danny Xie Li
+	 * Description: The next method open window principal.
+	 * Last modification: 25/02/18
+	 */
+	private void openWindowPrincipal() throws IOException
+	{
+		Parent root = FXMLLoader.load(getClass().getResource(WINDOW_MAIN_PRINCIPAL));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));  
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
 	}
 	
 	/**
