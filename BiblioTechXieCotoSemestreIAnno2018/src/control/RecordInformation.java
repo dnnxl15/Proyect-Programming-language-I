@@ -8,12 +8,14 @@ import java.text.SimpleDateFormat;
 import domain.Administrator;
 import domain.Audiovisual;
 import domain.Book;
+import domain.Loan;
+import domain.Material;
 import domain.Student;
-import file.FileWriter;
+import file.Writer;
 
 public class RecordInformation
 {
-	/*
+	/* 
 	 * Created: 02/24/2018
 	 * Author: Esteban Coto Alfaro
 	 * Description: Create a Student object
@@ -21,7 +23,7 @@ public class RecordInformation
 	 */
 	public void addStudent(String pName, String pSureName, String pIdentification, String pAddress, String pCarrer, String pLicense) throws FileNotFoundException, ClassNotFoundException
 	{
-		FileWriter writeFile = new FileWriter();
+		Writer writeFile = new Writer();
 		Student student = new Student(pName, pSureName, pIdentification, pAddress, pCarrer, pLicense);
 		writeFile.saveStudent(student);
 	}
@@ -34,9 +36,9 @@ public class RecordInformation
 	 */
 	public void addAdministrator(String pName, String pSureName, String pIdentification, String pAddress, String pUsername, String pPassword) throws FileNotFoundException, ClassNotFoundException
 	{
-		FileWriter writeFile = new FileWriter();
+		Writer writeFile = new Writer();
 		Administrator administrator = new Administrator(pName, pSureName, pIdentification, pAddress, pUsername, pPassword);
-		//writeFile.saveAdministrator(administrator);
+		writeFile.saveAdministrator(administrator);
 	}
 	
 	/* 
@@ -48,10 +50,9 @@ public class RecordInformation
 	public void addAudiovisual(String pName, int pTotalQuantity, int pQuantityAvailable, String pIncomingDate, boolean pStatus, String pType, int pCode) throws FileNotFoundException, ClassNotFoundException, ParseException
 	{
 		Date incomingDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pIncomingDate);
-		FileWriter writeFile = new FileWriter();
+		Writer writeFile = new Writer();
 		Audiovisual audiovisual = new Audiovisual(pName, pTotalQuantity, pQuantityAvailable, incomingDate, pStatus, pType, pCode);
 		writeFile.saveAudiovisualMaterial(audiovisual);
-		//saveAudiovisualMaterial(audiovisual);
 	}
 	
 	/* 
@@ -63,11 +64,49 @@ public class RecordInformation
 	public void addBook(String pName, int pTotalQuantity, int pQuantityAvailable, String pIncomingDate, boolean pStatus, 
 			String pType, String pCode, String pAuthor, String pReleaseDate, int pPageQuantity) throws FileNotFoundException, ClassNotFoundException, ParseException
 	{
-		Date incomingDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pIncomingDate);
-		Date releaseDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pReleaseDate);
-		FileWriter writeFile = new FileWriter();
+		Date incomingDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pIncomingDate); //Change from String to Date
+		Date releaseDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pReleaseDate); //Change from String to Date
+		Writer writeFile = new Writer();
 		Book book = new Book(pName, pTotalQuantity, pQuantityAvailable, incomingDate, pStatus, pType, pCode, pAuthor, releaseDate, pPageQuantity);
-		writeFile.saveBookMaterial(book);
-		//saveBookMaterial(book);
+		writeFile.saveBookMaterial(book); //Call the saveBookMaterial in a material file
+	}
+	
+	/* 
+	 * Created: 02/25/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Create an Loan Object
+	 * Last modification: 02/25/2018 
+	 */
+	public void addLoan(String pUsername, String pPassword, String pName, String pLicense, String pStartDate, String pEndDate, String pMaterialName) throws FileNotFoundException, ClassNotFoundException, ParseException
+	{
+		Date startDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pStartDate); //Change from String to Date
+		Date endDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pEndDate); //Change from String to Date
+		Writer writeFile = new Writer();
+		GetInformation info = new GetInformation(); //Constructor to access all the information
+		Administrator admiObject = info.getAdmiInfo(pUsername, pPassword); //Get the administrator object
+		Student studentObject = info.getStudentInfo(pName, pLicense); //Get the student object
+		Material materialObject = info.getMaterialInfo(pMaterialName); //Get the material object
+		Loan loan = new Loan(startDate, endDate, studentObject, admiObject, materialObject); //Create a Loan object
+		writeFile.saveLoan(loan); //Save the new Loan object in the file
+	}
+	
+	/* 
+	 * Created: 02/25/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Make a return of a material
+	 * Last modification: 02/26/2018 
+	 */
+	public void makeReturn(String pName, String pLicense, String pMaterialName) throws FileNotFoundException, ClassNotFoundException, ParseException
+	{
+		GetInformation info = new GetInformation(); //Constructor to access all the information
+		Student studentObject = info.getStudentInfo(pName, pLicense); //Get the student object
+		Material materialObject = info.getMaterialInfo(pMaterialName); //Get the material object
+		LoanControl loan = new LoanControl(); //Constructor for the loan control
+		boolean boolResult = loan.verifyInformation(studentObject, materialObject); //Verify if the information exists
+		if(boolResult == true)
+		{
+			loan.makeAReturn(studentObject, materialObject); //Call the return method from Loan class
+		}
 	}
 }
+

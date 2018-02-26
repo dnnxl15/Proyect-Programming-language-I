@@ -70,3 +70,4 @@ public class Material implements IConstant
 		this.status = status;
 	}
 }
+

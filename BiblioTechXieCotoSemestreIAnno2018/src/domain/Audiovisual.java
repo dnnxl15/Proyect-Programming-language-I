@@ -26,8 +26,8 @@ public class Audiovisual extends Material implements IConstant
 		return type;
 	}
 	
-	public void setType(String pType) {
-		this.type = pType;
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	public int getCode() {

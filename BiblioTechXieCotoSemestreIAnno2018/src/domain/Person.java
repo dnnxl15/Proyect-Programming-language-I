@@ -59,3 +59,4 @@ public class Person implements Serializable, IConstant
 		this.address = address;
 	}
 }
+
