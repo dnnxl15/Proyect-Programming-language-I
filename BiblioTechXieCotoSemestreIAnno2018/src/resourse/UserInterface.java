@@ -11,7 +11,7 @@ import javafx.stage.StageStyle;
 import resourse.*;
 
 public class UserInterface extends Application
-{//
+{
 	/**
 	 * Attributes of the window
 	 */

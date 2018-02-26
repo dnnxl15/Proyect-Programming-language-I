@@ -3,7 +3,7 @@ package library;
 import java.util.Date;
 
 public interface IConstant
-{
+{//
 	public final static String DEFAULT_VALUE_STUDENT_CARRER = "No carrer";
 	
 	public final static String DEFAULT_VALUE_STUDENT_ID = "No id";
