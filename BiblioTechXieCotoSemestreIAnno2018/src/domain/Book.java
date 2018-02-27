@@ -2,6 +2,7 @@ package domain;
 
 import java.sql.Date;
 
+import exception.CodeBookException;
 import library.IConstant;
 
 public class Book extends Material implements IConstant
@@ -22,11 +23,16 @@ public class Book extends Material implements IConstant
 	}
 	
 	public Book(String pName, int pTotalQuantity, int pQuantityAvailable, Date pIncomingDate, boolean pStatus, String pType, String pCode,
-			String pAuthor, Date pReleaseDate, int pPageQuantity)
+			String pAuthor, Date pReleaseDate, int pPageQuantity) throws CodeBookException
 	{
 		super( pName, pTotalQuantity, pQuantityAvailable, pIncomingDate, pStatus);
 		this.type = pType;
-		this.code = pCode;
+		if(code.length() > ISBN_VALUE){
+			this.code = pCode;
+		}
+		else{
+			throw new CodeBookException(pCode);
+		}
 		this.author = pAuthor;
 		this.releaseDate = pReleaseDate;
 		this.pageQuantity = pPageQuantity;

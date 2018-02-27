@@ -19,7 +19,7 @@ public class EditInformation
 	public void removeAvailableQuantity(Loan pLoan) throws FileNotFoundException, ClassNotFoundException
 	{
 		ArrayList<Material> materialList = new ArrayList<Material>(); //ArrayList would store Material Objects
-		Reader readFile = new Reader(); //Reder constructor
+		Reader readFile = new Reader(); //Reader constructor
 		materialList = readFile.readMaterial(); //Charge the ArrayList with the Material
 		for(int position = 0; position < materialList.size(); position++) //Search each position of the list
 		{

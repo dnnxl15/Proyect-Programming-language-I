@@ -1,9 +1,10 @@
 package library;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public interface IConstant
-{//
+{
 	public final static String DEFAULT_VALUE_STUDENT_CARRER = "No carrer";
 	
 	public final static String DEFAULT_VALUE_STUDENT_ID = "No id";
@@ -55,5 +56,26 @@ public interface IConstant
 	public final static String WINDOW_REGISTER_MATERIAL = "RegisterMaterial.fxml";
 	
 	public final static String WINDOW_MAIN_PRINCIPAL = "MainWindow.fxml";
-//
+	
+	public final static int ONE_HUNDRED = 100;
+	
+	public final static int ONE_THOUSAND = 1000;
+	
+	public final static String[] BOOK_VALUES = {"Digital", "Physical"};
+
+	public final static int ISBN_VALUE = 10;
+	
+	public final static String BOOK = "Book";
+	
+	public final static String AUDIOVISUAL = "Audiovisual";
+
+	public final static String MESSAGE_FAILED = "Error";
+	
+	public final static String QUOTE = "";
+	
+	public final static String COMPLETE_FIELDS = "Complete all the fields";
+	
+	public final static String MESSAGE_SUCCESS  = "Register with success";
+
+
 }

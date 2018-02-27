@@ -29,8 +29,8 @@ public class UserInterface extends Application
 	{
 		try 
 		{
-			Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-		    Scene scene = new Scene(root, 924, 708);
+			Parent root = FXMLLoader.load(getClass().getResource("RegisterMaterial.fxml"));
+		    Scene scene = new Scene(root, 1200, 700);//924, 708);
 		    root.setOnMousePressed(new EventHandler<MouseEvent>() 
 		    {
 	            @Override

@@ -11,7 +11,6 @@ import domain.Loan;
 import domain.Material;
 import domain.Student;
 
-
 public class Reader 
 {
 	public Reader()
@@ -114,4 +113,3 @@ public class Reader
 		return loanList;
 	}
 }
-
