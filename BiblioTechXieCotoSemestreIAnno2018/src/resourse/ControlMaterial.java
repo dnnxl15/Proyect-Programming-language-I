@@ -33,8 +33,8 @@ public class ControlMaterial implements IConstant, IFunction
 	@FXML private JFXButton main_btn_registerMaterial_registerAudio;
 	@FXML private JFXButton main_btn_registerMaterial_registerBook;
 
-	@FXML private JFXButton main_btn_signUp_close;
-	@FXML private JFXButton main_btn_signUp_hide;
+	@FXML private JFXButton main_btn_close;
+	@FXML private JFXButton main_btn_hide;
 
 	@FXML private JFXTextField main_txt_registerMaterial_nameMaterial;
 	@FXML private JFXTextField main_txt_registerMaterial_nameAudio;
@@ -71,8 +71,9 @@ public class ControlMaterial implements IConstant, IFunction
 	{
 		materialData = FXCollections.observableArrayList();
 		// Initialize the variable listElement
+		// FALTAR CARGAR TODOS LOS MATERIALES REGISTRADOS EN UNA LISTA.
 		listElement = FXCollections.observableArrayList();
-		setVisibleBook(false); // Set false visible to the book elements
+		setVisibleBook(true); // Set false visible to the book elements
 		main_rd_registerMaterial_Audiovisual.setOnAction(new EventHandler<ActionEvent>() {
 	        @Override
 	        public void handle(ActionEvent arg0)
@@ -80,14 +81,14 @@ public class ControlMaterial implements IConstant, IFunction
 	        	if(main_rd_registerMaterial_Audiovisual.isSelected())
 	        	{
 	        		main_rd_registerMaterial_Audiovisual.setText(BOOK);
-	        		setVisibleAudio(false);
-	        		setVisibleBook(true);
+	        		setVisibleAudio(true);
+	        		setVisibleBook(false);
 	        	}
 	        	else
 	        	{
 	        		main_rd_registerMaterial_Audiovisual.setText(AUDIOVISUAL);
-	        		setVisibleAudio(true);
-	        		setVisibleBook(false);
+	        		setVisibleAudio(false);
+	        		setVisibleBook(true);
 	        	}
 	        }
         });
@@ -246,11 +247,11 @@ public class ControlMaterial implements IConstant, IFunction
 	 */
 	private void setVisibleAudio(boolean pValue)
 	{	
-		main_txt_registerMaterial_nameAudio.setVisible(pValue);
-		main_btn_registerMaterial_audioType.setVisible(pValue);
-		main_cmb_registerMaterial_audioType.setVisible(pValue);
-		main_txt_registerMaterial_codeAudio.setVisible(pValue);
-		main_btn_registerMaterial_registerAudio.setVisible(pValue);
+		main_txt_registerMaterial_nameAudio.setDisable(pValue);
+		main_btn_registerMaterial_audioType.setDisable(pValue);
+		main_cmb_registerMaterial_audioType.setDisable(pValue);
+		main_txt_registerMaterial_codeAudio.setDisable(pValue);
+		main_btn_registerMaterial_registerAudio.setDisable(pValue);
 	}
 	
 	/**
@@ -262,12 +263,12 @@ public class ControlMaterial implements IConstant, IFunction
 	 */
 	private void setVisibleBook(boolean pValue)
 	{	
-		main_cmb_registerMaterial_typeBook.setVisible(pValue);
-		main_txt_registerMaterial_codeBook.setVisible(pValue);
-		main_txt_registerMaterial_nameAuthorBook.setVisible(pValue);
-		main_date_registerMaterial_releaseDateBook.setVisible(pValue);
-		main_cmb_registerMaterial_pageQuantityBook.setVisible(pValue);
-		main_btn_registerMaterial_registerBook.setVisible(pValue);
+		main_cmb_registerMaterial_typeBook.setDisable(pValue);
+		main_txt_registerMaterial_codeBook.setDisable(pValue);
+		main_txt_registerMaterial_nameAuthorBook.setDisable(pValue);
+		main_date_registerMaterial_releaseDateBook.setDisable(pValue);
+		main_cmb_registerMaterial_pageQuantityBook.setDisable(pValue);
+		main_btn_registerMaterial_registerBook.setDisable(pValue);
 	}
 	
 	/**
@@ -279,7 +280,7 @@ public class ControlMaterial implements IConstant, IFunction
 	 */
 	public void closeAction()
 	{
-		Stage stage = (Stage) main_btn_signUp_close.getScene().getWindow();
+		Stage stage = (Stage) main_btn_close.getScene().getWindow();
 		stage.close();
 	}
 	
@@ -292,7 +293,7 @@ public class ControlMaterial implements IConstant, IFunction
 	 */
 	public void hideAction()
 	{
-		Stage stage = (Stage) main_btn_signUp_hide.getScene().getWindow();
+		Stage stage = (Stage) main_btn_hide.getScene().getWindow();
 		stage.setIconified(true);
 	}
 }

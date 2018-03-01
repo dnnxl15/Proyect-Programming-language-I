@@ -55,6 +55,22 @@ public class ControlMainWindow implements IConstant
 	}
 	
 	/**
+	 * Method open window loan and devolution
+	 * Author: Danny Xie Li
+	 * Description: The next method open window loan and devolution.
+	 * Created: 01/03/18
+	 * Last modification: 01/03/18
+	 */
+	public void openWindowLoan() throws IOException
+	{
+         Parent root = FXMLLoader.load(getClass().getResource(WINDOW_LOAN_AND_DEVOLUTION));
+         Stage stage = new Stage();
+         stage.setScene(new Scene(root));  
+         stage.initStyle(StageStyle.TRANSPARENT);
+         stage.show();
+	}
+	
+	/**
 	 * Method close button
 	 * Author: Danny Xie Li
 	 * Description: The next method close the window.

@@ -11,6 +11,11 @@ public class Person implements Serializable, IConstant
 	private String identification;
 	private String address;
 	
+	public Person(String pName)
+	{
+		name = pName;
+	}
+	
 	public Person()
 	{
 		name = DEFAULT_VALUE_PERSON_NAME;
@@ -57,6 +62,12 @@ public class Person implements Serializable, IConstant
 	
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name;
 	}
 }
 

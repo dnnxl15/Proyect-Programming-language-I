@@ -57,6 +57,8 @@ public interface IConstant
 	
 	public final static String WINDOW_MAIN_PRINCIPAL = "MainWindow.fxml";
 	
+	public final static String WINDOW_LOAN_AND_DEVOLUTION = "RegisterLoan.fxml";
+	
 	public final static int ONE_HUNDRED = 100;
 	
 	public final static int ONE_THOUSAND = 1000;
@@ -77,5 +79,5 @@ public interface IConstant
 	
 	public final static String MESSAGE_SUCCESS  = "Register with success";
 
-
+	public final static String MESSAGE_ERROR_SELECT_ITEM ="Please select an item";
 }
