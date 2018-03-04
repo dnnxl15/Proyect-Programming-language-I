@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import domain.Administrator;
 import domain.Material;
+import domain.Person;
 import domain.Student;
+import file.ControlFile;
 import file.Reader;
 
 public class GetInformation 
@@ -37,20 +39,20 @@ public class GetInformation
 	 * Description: Get an student object by receiving name and license
 	 * Last modification: 02/25/2018 
 	 */
-	public Student getStudentInfo(String pName, String pLicense) throws FileNotFoundException, ClassNotFoundException
+	public Object getStudentInfo(String pName, String pLicense) throws FileNotFoundException, ClassNotFoundException
 	{
-		ArrayList<Student> studentList = new ArrayList<Student>(); //Would store an arayList with all the saved objects
-		Reader reader = new Reader(); //constructor to call readStudent function
-		Student student = new Student(); //Student object
-		student = null;
-		studentList = reader.readStudent(); //call the method to read the student file
-		for(int position = 0; position < studentList.size(); position++) //Analyze every register form the arrayList
+		ArrayList<Object> objectList = new ArrayList<Object>(); //Would store an arayList with all the saved objects
+		ControlFile reader = new ControlFile(); //constructor to call readStudent function
+		Object object = new Object(); //Student object
+		object = null;
+		objectList = reader.readFile("Student.ser"); //call the method to read the student file
+		for(int position = 0; position < objectList.size(); position++) //Analyze every register form the arrayList
 		{
 			//Condition when the name and license is equal
-			if(studentList.get(position).getName().toString().equals(pName) && studentList.get(position).getLicense().toString().equals(pLicense))
-				student = studentList.get(position);
+			if(((Student) objectList.get(position)).getName().toString().equals(pName) && ((Student) objectList.get(position)).getLicense().toString().equals(pLicense))
+				object = objectList.get(position);
 		}
-		return student;
+		return object;
 	}
 	
 	/* 
@@ -59,20 +61,21 @@ public class GetInformation
 	 * Description: Get a Material object by receiving name
 	 * Last modification: 02/25/2018 
 	 */
-	public Material getMaterialInfo(String pName) throws FileNotFoundException, ClassNotFoundException
+	public Object getMaterialInfo(String pName, String pFile) throws FileNotFoundException, ClassNotFoundException
 	{
-		ArrayList<Material> materialList = new ArrayList<Material>(); //Would store an arayList with all the saved objects
-		Reader reader = new Reader(); //constructor to call readStudent function
-		Material material = new Material(); //Material object
-		material = null;
-		materialList = reader.readMaterial(); //call the method to read the material file
-		for(int position = 0; position < materialList.size(); position++) //Analyze every register form the arrayList
+		ArrayList<Object> objectList = new ArrayList<Object>(); //Would store an arayList with all the saved objects
+		ControlFile reader = new ControlFile(); //constructor to call readStudent function
+		Object object = new Object(); //Material object
+		objectList = reader.readFile(pFile); //call the method to read the material file
+		for(int position = 0; position < objectList.size(); position++) //Analyze every register form the arrayList
 		{
 			//Condition when the material name is equal
-			if(materialList.get(position).getName().toString().equals(pName))
-				material = materialList.get(position);
+			if(((Material)objectList.get(position)).getName().toString().equals(pName))
+			{
+				object = objectList.get(position);
+			}
 		}
-		return material;
+		return object;
 	}
 	
 	/* 

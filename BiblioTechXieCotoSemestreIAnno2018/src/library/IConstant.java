@@ -45,7 +45,7 @@ public interface IConstant
 
 	public final static String DEFAULT_VALUE_AUDIOVISUAL_TYPE = "No type";
 
-	public final static int DEFAULT_VALUE_AUDIOVISUAL_CODE = 0;
+	public final static String DEFAULT_VALUE_AUDIOVISUAL_CODE = "No code";
 
 	public final static String DEFAULT_VALUE_ADMINISTRATOR_USERNAME = "No username";
 
@@ -80,4 +80,6 @@ public interface IConstant
 	public final static String MESSAGE_SUCCESS  = "Register with success";
 
 	public final static String MESSAGE_ERROR_SELECT_ITEM ="Please select an item";
+	
+	public final static String MESSAGE_NOT_AVAILABLE_ITEM ="Material is not available";
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="1207.0" style="-fx-background-color: #011b65;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resourse.ControlMaterial">
+   <children>
+      <Pane prefHeight="29.0" prefWidth="1207.0" style="-fx-background-color: #0e6aad;">
+         <children>
+            <JFXButton fx:id="main_btn_close" layoutX="1175.0" layoutY="-1.0" onAction="#closeAction" prefHeight="22.0" prefWidth="37.0" text="X" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="main_btn_hide" layoutX="1138.0" layoutY="-1.0" onAction="#hideAction" prefHeight="22.0" prefWidth="37.0" text="_" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="44.0" layoutY="5.0" prefHeight="21.0" prefWidth="148.0" text="BiblioTech" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="734.0" layoutY="70.0" prefHeight="596.0" prefWidth="443.0" style="-fx-background-color: #d03c2f;">
+         <children>
+            <TableView fx:id="main_table_registerMaterial" layoutY="-3.0" prefHeight="605.0" prefWidth="443.0">
+              <columns>
+                <TableColumn fx:id="main_col_registerMaterial_Name" prefWidth="147.0" text="Name" />
+                <TableColumn fx:id="main_col_registerMaterial_Quantity" prefWidth="123.0" text="Quantity" />
+                  <TableColumn fx:id="main_col_registerMaterial_IncomingDate" prefWidth="172.0" text="Incoming date" />
+              </columns>
+            </TableView>
+         </children></Pane>
+      <Label layoutX="34.0" layoutY="64.0" text="Register material" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="main_txt_registerMaterial_nameMaterial" focusColor="WHITE" layoutX="42.0" layoutY="209.0" prefHeight="31.0" prefWidth="288.0" promptText="Name" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff;" unFocusColor="#515151" />
+      <JFXTextField fx:id="main_txt_registerMaterial_codeAudio" focusColor="WHITE" layoutX="42.0" layoutY="559.0" prefHeight="31.0" prefWidth="288.0" promptText="Code" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff;" unFocusColor="#515151" />
+      <JFXButton fx:id="main_btn_registerMaterial_registerAudio" buttonType="RAISED" layoutX="136.0" layoutY="648.0" onAction="#registerAudiovisual" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d03c2f;" text="Register" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="main_cmb_registerMaterial_audioType" layoutX="42.0" layoutY="493.0" prefHeight="31.0" prefWidth="288.0" promptText="Type" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+      <JFXComboBox fx:id="main_cmb_registerMaterial_quantityMaterial" layoutX="42.0" layoutY="271.0" prefHeight="31.0" prefWidth="288.0" promptText="Quantity" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+      <JFXDatePicker fx:id="main_date_registerMaterial_incomingDateMaterial" defaultColor="#14d0bd" layoutX="42.0" layoutY="345.0" prefHeight="31.0" prefWidth="288.0" promptText="Incoming date" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+      <JFXButton fx:id="main_btn_registerMaterial_audioType" buttonType="RAISED" layoutX="251.0" layoutY="429.0" onAction="#addTypeAudiovisual" prefHeight="31.0" prefWidth="79.0" style="-fx-background-color: #d03c2f;" text="Add" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="main_txt_registerMaterial_nameAudio" focusColor="WHITE" layoutX="42.0" layoutY="429.0" prefHeight="31.0" prefWidth="168.0" promptText="Type" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff;" unFocusColor="#515151" />
+      <RadioButton fx:id="main_rd_registerMaterial_Audiovisual" layoutX="42.0" layoutY="153.0" mnemonicParsing="false" text="Audiovisual" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </RadioButton>
+      <JFXTextField fx:id="main_txt_registerMaterial_codeBook" focusColor="WHITE" layoutX="391.0" layoutY="314.0" prefHeight="31.0" prefWidth="288.0" promptText="Code" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff;" unFocusColor="#515151" />
+      <JFXTextField fx:id="main_txt_registerMaterial_nameAuthorBook" focusColor="WHITE" layoutX="391.0" layoutY="387.0" prefHeight="31.0" prefWidth="288.0" promptText="Author" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff;" unFocusColor="#515151" />
+      <JFXDatePicker fx:id="main_date_registerMaterial_releaseDateBook" defaultColor="#14d0bd" layoutX="391.0" layoutY="478.0" prefHeight="31.0" prefWidth="288.0" promptText="Release date" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+      <JFXComboBox fx:id="main_cmb_registerMaterial_pageQuantityBook" layoutX="391.0" layoutY="559.0" prefHeight="31.0" prefWidth="288.0" promptText="Page quantity" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+      <JFXButton fx:id="main_btn_registerMaterial_registerBook" buttonType="RAISED" layoutX="485.0" layoutY="648.0" onAction="#registerBook" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d03c2f;" text="Register" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="main_cmb_registerMaterial_typeBook" layoutX="392.0" layoutY="240.0" prefHeight="31.0" prefWidth="288.0" promptText="Type" style="-fx-prompt-text-fill: #ffff; -fx-text-fill: #ffff; -fx-background-color: #ffff;" />
+   </children>
+</AnchorPane>

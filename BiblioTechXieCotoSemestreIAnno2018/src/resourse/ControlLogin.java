@@ -1,11 +1,21 @@
 package resourse;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import domain.Administrator;
+import domain.Book;
+import domain.Library;
+import domain.Material;
+import domain.Person;
+import domain.Student;
+import file.ControlFile;
+import file.Reader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,9 +48,11 @@ public class ControlLogin implements IConstant
 	 * Method sign up
 	 * Author: Danny Xie Li
 	 * Description: The next method sign up to the system.
-	 * Last modification: 20/2/18
+	 * Last modification: 03/03/18 by Esteban Coto
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
-	public void signUp()
+	public void signUp() throws ClassNotFoundException, IOException
 	{
 		String username = main_txt_signUp_username.getText().toString();
 		String password = main_txt_signUp_password.getText().toString();
@@ -51,19 +63,31 @@ public class ControlLogin implements IConstant
 			alert.showAndWait();
 		}
 		// FALTA consultar si existe este username sino tirar un mensaje
-		// if(username && password existe)
-		//{
-		//		openWindowPrincipal();
-		//}
-		//else{
-		//Alert alert = new Alert(AlertType.ERROR, "User don't exist");
-		//alert.showAndWait();
-		//}
-		
-		System.out.println(username + password);
+		else 
+		{
+			ControlFile control = new ControlFile();
+			ArrayList<Object> objectList = control.readFile("Administrator.ser");
+			boolean controller = false;
+			for(int position = 0; position < objectList.size(); position++)
+			{
+				if(((Administrator) objectList.get(position)).getUsername().toString().equals(username) && ((Administrator) objectList.get(position)).getPassword().equals(password))
+				{
+					openWindowPrincipal();
+					controller = true;
+				}
+				
+			}
+			if (controller == false)
+			{
+				ArrayList<Object> object = control.readFile("Loan.ser");
+				System.out.println(object.size());
+				Alert alert = new Alert(AlertType.ERROR, "User or password is incorrect");
+				alert.showAndWait();
+			}
+		}
 	}
 	
-	public void signIn()
+	public void signIn() throws FileNotFoundException, ClassNotFoundException
 	{
 		String name = main_txt_signIn_name.getText().toString();
 		String lastname = main_txt_signIn_lastname.getText().toString();
@@ -73,12 +97,6 @@ public class ControlLogin implements IConstant
 		String password = main_txt_signIn_password.getText().toString();
 		String confirmPassword = main_txt_signIn_confirmPassword.getText().toString();
 		
-		//--------------------------------------
-		// FALTA
-		// Registrar al archivo y al objecto library. 
-		//--------------------------------------
-		System.out.println(username + password + lastname + identification + address);
-
 		if(!password.equals(confirmPassword))
 		{
 			Alert alert = new Alert(AlertType.ERROR, "Password don't match");
@@ -91,6 +109,11 @@ public class ControlLogin implements IConstant
 			Alert alert = new Alert(AlertType.ERROR, "Complete all the fields");
 			alert.showAndWait();
 			return;
+		}
+		else
+		{
+			Library library = new Library(); //The new administrator is added to the ArrayList<Administrator> in the Library class
+			library.addAdministrator(name, lastname, identification, address, username, password);
 		}
 	}
 	

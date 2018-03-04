@@ -50,11 +50,13 @@ public class Reader
 	public ArrayList<Administrator> readAdministrator() throws FileNotFoundException, ClassNotFoundException
 	{
 		ArrayList<Administrator> administratorList = new ArrayList<Administrator>(); //the arrayList would store Administrator objects
+		Administrator admi = new Administrator();
 		try
 		{
 			FileInputStream fileIS = new FileInputStream("Administrator.ser"); //open the file
 			ObjectInputStream objectIS = new ObjectInputStream(fileIS); //read the file
-			administratorList = (ArrayList<Administrator>) objectIS.readObject(); //The method readObject() take the reader object
+			admi = (Administrator) objectIS.readObject(); //The method readObject() take the reader object
+			administratorList.add(admi);
 			objectIS.close(); 
 			fileIS.close();
 		}catch(FileNotFoundException e){

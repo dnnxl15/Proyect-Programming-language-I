@@ -1,13 +1,14 @@
 package domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import library.IConstant;
 
-public class Audiovisual extends Material implements IConstant
+public class Audiovisual extends Material implements Serializable, IConstant
 {
 	private String type;
-	private int code;
+	private String code;
 	
 	public Audiovisual()
 	{
@@ -15,7 +16,7 @@ public class Audiovisual extends Material implements IConstant
 		code = DEFAULT_VALUE_AUDIOVISUAL_CODE;
 	}
 	
-	public Audiovisual(String pName, int pTotalQuantity, int pQuantityAvailable, Date pIncomingDate, boolean pStatus, String pType, int pCode)
+	public Audiovisual(String pName, int pTotalQuantity, int pQuantityAvailable, Date pIncomingDate, boolean pStatus, String pType, String pCode)
 	{
 		super(pName, pTotalQuantity, pQuantityAvailable, pIncomingDate, pStatus);
 		this.type = pType;
@@ -30,11 +31,11 @@ public class Audiovisual extends Material implements IConstant
 		this.type = type;
 	}
 	
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
 	
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 }
