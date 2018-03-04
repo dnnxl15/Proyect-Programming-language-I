@@ -1,14 +1,21 @@
 package resourse;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+
+import domain.Library;
 import domain.Material;
+import exception.CodeBookException;
+import file.ControlFile;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -66,12 +73,11 @@ public class ControlMaterial implements IConstant, IFunction
 	 * Description: The next method initialize the .fxml ControlMaterial.
 	 * Created: 27/02/18
 	 * Last modification: 27/02/18
+	 * @throws ClassNotFoundException 
 	 */
-	@FXML public void initialize() 
+	@FXML public void initialize() throws ClassNotFoundException 
 	{
 		materialData = FXCollections.observableArrayList();
-		// Initialize the variable listElement
-		// FALTAR CARGAR TODOS LOS MATERIALES REGISTRADOS EN UNA LISTA.
 		listElement = FXCollections.observableArrayList();
 		setVisibleBook(true); // Set false visible to the book elements
 		main_rd_registerMaterial_Audiovisual.setOnAction(new EventHandler<ActionEvent>() {
@@ -112,8 +118,12 @@ public class ControlMaterial implements IConstant, IFunction
 	 * Description: The next method register a book to the register.
 	 * Created: 27/02/18
 	 * Last modification: 27/02/18
+	 * @throws CodeBookException 
+	 * @throws ParseException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public void registerBook()
+	public void registerBook() throws FileNotFoundException, ClassNotFoundException, ParseException, CodeBookException
 	{
 		Alert alert; // Message variable
 		// Variables of the book
@@ -148,15 +158,14 @@ public class ControlMaterial implements IConstant, IFunction
 			alert.showAndWait();
 			return;
 		}
-		// FALTA CREAR AUDIOVISUAL, GUARDARLO EN EL ARCHIVO Y EN LIBRARY
-		alert = new Alert(AlertType.INFORMATION, MESSAGE_SUCCESS);
-		alert.showAndWait();
-		cleanTextField();
-		//Example
-		// FALTAR CARGAR TODOS LOS MATERIALES EN UNA LISTA
+		Library library = new Library(); //The new Book is added to the ArrayList<Book> in the Library class
+		library.addBook(nameMaterial, quantity, quantity, incomingDate, true, typeBook, codeBook, authorBook, releaseDate, pageQuantity);
 		Material newMaterial = new Material(nameMaterial, quantity, quantity, incomingDate, true);
 		materialData.add(newMaterial);
 		main_table_registerMaterial.setItems(materialData);
+		alert = new Alert(AlertType.INFORMATION, MESSAGE_SUCCESS);
+		alert.showAndWait();
+		cleanTextField();
 	}
 	
 	/**
@@ -165,8 +174,11 @@ public class ControlMaterial implements IConstant, IFunction
 	 * Description: The next method register an audiovisual material to the register.
 	 * Created: 27/02/18
 	 * Last modification: 27/02/18
+	 * @throws ParseException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public void registerAudiovisual()
+	public void registerAudiovisual() throws FileNotFoundException, ClassNotFoundException, ParseException
 	{
 		Alert alert; // Message 
 		// Audiovisual attributes 
@@ -196,15 +208,14 @@ public class ControlMaterial implements IConstant, IFunction
 			alert.showAndWait();
 			return;
 		}
-		// FALTA CREAR AUDIOVISUAL, GUARDARLO EN EL ARCHIVO Y EN LIBRARY
-		alert = new Alert(AlertType.INFORMATION, MESSAGE_SUCCESS);
-		alert.showAndWait();
-		cleanTextField();
-		//Example
-		// FALTAR CARGAR TODOS LOS MATERIALES EN UNA LISTA
+		Library library = new Library(); //The new administrator is added to the ArrayList<Administrator> in the Library class
+		library.addAudiovisual(nameMaterial, quantity, quantity, incomingDate, true, typeAudio, code);
 		Material newMaterial = new Material(nameMaterial, quantity, quantity, incomingDate, true);
 		materialData.add(newMaterial);
 		main_table_registerMaterial.setItems(materialData);
+		alert = new Alert(AlertType.INFORMATION, MESSAGE_SUCCESS);
+		alert.showAndWait();
+		cleanTextField();
 	}
 	
 	/**

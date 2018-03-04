@@ -1,93 +1,100 @@
 package control;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import domain.Administrator;
 import domain.Audiovisual;
 import domain.Book;
+import domain.Library;
 import domain.Loan;
 import domain.Material;
+import domain.Person;
 import domain.Student;
+import exception.CodeBookException;
+import file.ControlFile;
 import file.Writer;
 
 public class RecordInformation
 {
 	/* 
-	 * Created: 02/24/2018
+	 * Created: 03/02/2018
 	 * Author: Esteban Coto Alfaro
-	 * Description: Create a Student object
-	 * Last modification: 02/24/2018 
+	 * Description: To save a Person object
+	 * Last modification: 03/02/2018 
 	 */
-	public void addStudent(String pName, String pSureName, String pIdentification, String pAddress, String pCarrer, String pLicense) throws FileNotFoundException, ClassNotFoundException
+	public void addPerson(Person pPerson, boolean pBool) throws ClassNotFoundException
 	{
-		Writer writeFile = new Writer();
-		Student student = new Student(pName, pSureName, pIdentification, pAddress, pCarrer, pLicense);
-		writeFile.saveStudent(student);
+		if (pBool == true)
+			saveData("Student.ser", pPerson);
+		else
+			saveData("Administrator.ser", pPerson);
 	}
 	
 	/* 
-	 * Created: 02/24/2018
+	 * Created: 03/02/2018
 	 * Author: Esteban Coto Alfaro
-	 * Description: Create an Administrator Object
-	 * Last modification: 02/24/2018 
+	 * Description: To save a Material object
+	 * Last modification: 03/02/2018 
 	 */
-	public void addAdministrator(String pName, String pSureName, String pIdentification, String pAddress, String pUsername, String pPassword) throws FileNotFoundException, ClassNotFoundException
+	public void addMaterial(Material pMaterial) throws ClassNotFoundException
 	{
-		Writer writeFile = new Writer();
-		Administrator administrator = new Administrator(pName, pSureName, pIdentification, pAddress, pUsername, pPassword);
-		writeFile.saveAdministrator(administrator);
+		saveData("Material.ser", pMaterial);
 	}
 	
 	/* 
-	 * Created: 02/24/2018
+	 * Created: 03/02/2018
 	 * Author: Esteban Coto Alfaro
-	 * Description: Create an Audiovisual object
-	 * Last modification: 02/24/2018 
+	 * Description: To save a Loan object
+	 * Last modification: 03/02/2018 
 	 */
-	public void addAudiovisual(String pName, int pTotalQuantity, int pQuantityAvailable, String pIncomingDate, boolean pStatus, String pType, int pCode) throws FileNotFoundException, ClassNotFoundException, ParseException
+	public void addLoan(Loan pLoan) throws ClassNotFoundException, FileNotFoundException
 	{
-		Date incomingDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pIncomingDate);
-		Writer writeFile = new Writer();
-		Audiovisual audiovisual = new Audiovisual(pName, pTotalQuantity, pQuantityAvailable, incomingDate, pStatus, pType, pCode);
-		writeFile.saveAudiovisualMaterial(audiovisual);
+		//EditInformation info = new EditInformation();
+		//info.removeAvailableQuantity(pLoan);
+		saveData("Loan.ser", pLoan);
 	}
 	
 	/* 
-	 * Created: 02/24/2018
+	 * Created: 03/02/2018
 	 * Author: Esteban Coto Alfaro
-	 * Description: Create a Book object
-	 * Last modification: 02/24/2018 
+	 * Description: Private saveData function to call the file
+	 * Last modification: 03/02/2018 
 	 */
-	public void addBook(String pName, int pTotalQuantity, int pQuantityAvailable, String pIncomingDate, boolean pStatus, 
-			String pType, String pCode, String pAuthor, String pReleaseDate, int pPageQuantity) throws FileNotFoundException, ClassNotFoundException, ParseException
+	private void saveData(String pFile, Object pObject) throws ClassNotFoundException
 	{
-		Date incomingDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pIncomingDate); //Change from String to Date
-		Date releaseDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pReleaseDate); //Change from String to Date
-		Writer writeFile = new Writer();
-		Book book = new Book(pName, pTotalQuantity, pQuantityAvailable, incomingDate, pStatus, pType, pCode, pAuthor, releaseDate, pPageQuantity);
-		writeFile.saveBookMaterial(book); //Call the saveBookMaterial in a material file
+		ControlFile controlFile = new ControlFile();
+		controlFile.writeFile(pFile, pObject);
 	}
 	
 	/* 
-	 * Created: 02/25/2018
+	 * Created: 03/02/2018
 	 * Author: Esteban Coto Alfaro
-	 * Description: Create an Loan Object
-	 * Last modification: 02/25/2018 
+	 * Description: Private saveData function to call the file
+	 * Last modification: 03/02/2018 
 	 */
-	public void addLoan(String pUsername, String pPassword, String pName, String pLicense, String pStartDate, String pEndDate, String pMaterialName) throws FileNotFoundException, ClassNotFoundException, ParseException
+	private ArrayList<Object> loadData(String pFile)
 	{
-		Date startDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pStartDate); //Change from String to Date
-		Date endDate = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(pEndDate); //Change from String to Date
-		Writer writeFile = new Writer();
-		GetInformation info = new GetInformation(); //Constructor to access all the information
-		Administrator admiObject = info.getAdmiInfo(pUsername, pPassword); //Get the administrator object
-		Student studentObject = info.getStudentInfo(pName, pLicense); //Get the student object
-		Material materialObject = info.getMaterialInfo(pMaterialName); //Get the material object
-		Loan loan = new Loan(startDate, endDate, studentObject, admiObject, materialObject); //Create a Loan object
-		writeFile.saveLoan(loan); //Save the new Loan object in the file
+		return null;
+	}
+	
+	/* 
+	 * Created: 03/02/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Private saveData function to call the file
+	 * Last modification: 03/02/2018 
+	 */
+	public void loadAllData()
+	{
+		ArrayList<Object> materialList = loadData("Material.ser");
+		ArrayList<Object> studentList = loadData("Student.ser");
+		ArrayList<Object> admiList = loadData("Administrator.ser");
+		ArrayList<Object> loanList = loadData("Loan.ser");
+		//Library library = new Library(materialList, loanList, studentList, admiList);
 	}
 	
 	/* 
@@ -99,8 +106,8 @@ public class RecordInformation
 	public void makeReturn(String pName, String pLicense, String pMaterialName) throws FileNotFoundException, ClassNotFoundException, ParseException
 	{
 		GetInformation info = new GetInformation(); //Constructor to access all the information
-		Student studentObject = info.getStudentInfo(pName, pLicense); //Get the student object
-		Material materialObject = info.getMaterialInfo(pMaterialName); //Get the material object
+		Student studentObject = (Student) info.getStudentInfo(pName, pLicense); //Get the student object
+		Material materialObject = (Material) info.getMaterialInfo(pMaterialName, "Material.ser"); //Get the material object
 		LoanControl loan = new LoanControl(); //Constructor for the loan control
 		boolean boolResult = loan.verifyInformation(studentObject, materialObject); //Verify if the information exists
 		if(boolResult == true)
@@ -109,4 +116,3 @@ public class RecordInformation
 		}
 	}
 }
-

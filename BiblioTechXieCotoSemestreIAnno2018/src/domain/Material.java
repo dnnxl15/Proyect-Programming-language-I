@@ -1,10 +1,11 @@
 package domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import library.IConstant;
 
-public class Material implements IConstant
+public class Material implements Serializable, IConstant
 {
 	private String name;
 	private int totalQuantity;
