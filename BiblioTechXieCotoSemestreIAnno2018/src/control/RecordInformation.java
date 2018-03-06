@@ -72,32 +72,6 @@ public class RecordInformation
 	}
 	
 	/* 
-	 * Created: 03/02/2018
-	 * Author: Esteban Coto Alfaro
-	 * Description: Private saveData function to call the file
-	 * Last modification: 03/02/2018 
-	 */
-	private ArrayList<Object> loadData(String pFile)
-	{
-		return null;
-	}
-	
-	/* 
-	 * Created: 03/02/2018
-	 * Author: Esteban Coto Alfaro
-	 * Description: Private saveData function to call the file
-	 * Last modification: 03/02/2018 
-	 */
-	public void loadAllData()
-	{
-		ArrayList<Object> materialList = loadData("Material.ser");
-		ArrayList<Object> studentList = loadData("Student.ser");
-		ArrayList<Object> admiList = loadData("Administrator.ser");
-		ArrayList<Object> loanList = loadData("Loan.ser");
-		//Library library = new Library(materialList, loanList, studentList, admiList);
-	}
-	
-	/* 
 	 * Created: 02/25/2018
 	 * Author: Esteban Coto Alfaro
 	 * Description: Make a return of a material
