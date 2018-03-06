@@ -49,7 +49,6 @@ public class ControlStudent
 			else
 			{
 				studentID = carrer.substring(0, 1) + id;
-				System.out.println(name+lastName+identification+address+carrer+ " " + studentID);
 				Library library = new Library(); //The new administrator is added to the ArrayList<Administrator> in the Library class
 				library.addStudent(name, lastName, identification, address, carrer, studentID);	
 			}

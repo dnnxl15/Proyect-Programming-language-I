@@ -79,7 +79,9 @@ public interface IConstant
 	
 	public final static String MESSAGE_SUCCESS  = "Register with success";
 
-	public final static String MESSAGE_ERROR_SELECT_ITEM ="Please select an item";
+	public final static String MESSAGE_ERROR_SELECT_ITEM = "Please select an item";
 	
-	public final static String MESSAGE_NOT_AVAILABLE_ITEM ="Material is not available";
+	public final static String MESSAGE_NOT_AVAILABLE_ITEM = "Material is not available";
+	
+	public final static int FINE_PER_DAY = 5;
 }

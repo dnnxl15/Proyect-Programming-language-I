@@ -17,6 +17,12 @@ public class ControlFile
 {
 	private File fileName;
 	
+	/* 
+	 * Created: 03/02/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Read the files
+	 * Last modification: 03/02/2018 
+	 */
 	public ArrayList<Object> readFile(String pFile) throws ClassNotFoundException
 	{
 		ArrayList<Object> objectList = new ArrayList<Object>(); //the arrayList would store Administrator objects
@@ -39,6 +45,12 @@ public class ControlFile
 		return objectList;
 	}
 	
+	/* 
+	 * Created: 03/02/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Write a new object in the file
+	 * Last modification: 03/02/2018 
+	 */
 	public void writeFile(String pFile, Object pObject) throws ClassNotFoundException
 	{
 		ArrayList<Object> objectList = new ArrayList<Object>(); //ArrayList with Objects
@@ -63,6 +75,12 @@ public class ControlFile
 		}		
 	}
 	
+	/* 
+	 * Created: 03/02/2018
+	 * Author: Esteban Coto Alfaro
+	 * Description: Write a hole arrayList in the file 
+	 * Last modification: 03/02/2018 
+	 */
 	public void writeArray(String pFile, ArrayList<Object> pArrayList) throws ClassNotFoundException
 	{
 		try

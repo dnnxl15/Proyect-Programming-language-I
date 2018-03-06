@@ -2,6 +2,9 @@ package resourse;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,11 +14,11 @@ import com.jfoenix.controls.JFXTextField;
 import domain.Administrator;
 import domain.Book;
 import domain.Library;
+import domain.Loan;
 import domain.Material;
 import domain.Person;
 import domain.Student;
 import file.ControlFile;
-import file.Reader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -78,9 +81,7 @@ public class ControlLogin implements IConstant
 				
 			}
 			if (controller == false)
-			{
-				ArrayList<Object> object = control.readFile("Loan.ser");
-				System.out.println(object.size());
+			{					
 				Alert alert = new Alert(AlertType.ERROR, "User or password is incorrect");
 				alert.showAndWait();
 			}

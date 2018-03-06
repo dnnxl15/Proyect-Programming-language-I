@@ -1,5 +1,5 @@
 package test;
 
-public class TestFileWriter {
-
+public class TestFileWriter 
+{
 }

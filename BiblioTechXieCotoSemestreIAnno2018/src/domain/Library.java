@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import control.GetInformation;
 import control.RecordInformation;
 import exception.CodeBookException;
-import file.Writer;
 import library.IConstant;
 
 public class Library implements IConstant

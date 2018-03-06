@@ -5,8 +5,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import file.Reader;
-import file.Writer;
 import library.IConstant;
 
 public class Loan implements Serializable, IConstant

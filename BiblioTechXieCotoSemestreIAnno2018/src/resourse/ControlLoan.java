@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.gluonhq.charm.glisten.control.AutoCompleteTextField;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import control.EditInformation;
 import control.GetInformation;
 import domain.*;
 import file.ControlFile;
@@ -139,6 +141,8 @@ public class ControlLoan implements Initializable, IConstant
 			}
 			else
 			{
+				EditInformation information = new EditInformation();
+				information.removeAvailableQuantity(materialName, "Material.ser"); //Call the edit information to remove one avaiable item
 				Library library = new Library(); //Library constructor is made
 				library.addLoan(name, id, startDate, endDate, materialName);
 			}
@@ -150,43 +154,55 @@ public class ControlLoan implements Initializable, IConstant
 	 * Author: Danny Xie Li
 	 * Description: The next method return the material, get the student info and then call the method return material.
 	 * Created: 1/03/18
-	 * Last modification: 1/03/18
+	 * Last modification: 05/03/18 by Esteban Coto Alfaro
 	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public void returnMaterial() throws ClassNotFoundException
+	public void returnMaterial() throws ClassNotFoundException, FileNotFoundException
 	{		
 		Alert alert; // Message 
-		String name = main_txt_registerLoan_studentName.getText().toString();
-		String id = main_txt_registerLoan_idStudent.getText().toString();
-		String material = main_lbl_registerLoan_labelName.getText().toString();
-		if(material.equals("Name"))
+		String name = main_txt_registerLoan_studentName.getText().toString(); //Get the name of the student
+		String id = main_txt_registerLoan_idStudent.getText().toString(); //the id of the student
+		String material = main_lbl_registerLoan_labelName.getText().toString(); //read the name of the material
+		if(material.equals("Name")) //validate if there is some material selected
 		{
 			alert = new Alert(AlertType.ERROR, MESSAGE_ERROR_SELECT_ITEM);
 			alert.showAndWait();
 		}
 		else
 		{
-			ControlFile file = new ControlFile();
-			ArrayList<Object> objectList = file.readFile("Loan.ser");
-			boolean verify = false;
-			for (int position = 0; position < objectList.size(); position++)
+			ControlFile file = new ControlFile(); //Create a constructor
+			ArrayList<Object> objectList = file.readFile("Loan.ser"); //Charche the loan file to search
+			boolean verify = false; //to validate if the loan exists
+			for (int position = 0; position < objectList.size(); position++) //search the loan
 			{
 				if(((Loan)objectList.get(position)).getStudent().getLicense().toString().equals(id.toString()) &&
-						((Loan)objectList.get(position)).getMaterial().getName().toString().equals(material.toString()))
+						((Loan)objectList.get(position)).getMaterial().getName().toString().equals(material.toString())) //if the loan if found
 				{
-					System.out.println(objectList.size());
-					objectList.remove(position);
-					System.out.println(objectList.size());
+					Date endDate = ((Loan)objectList.get(position)).getEndDate(); //get the end date of the loan
+					LocalDate now = LocalDate.now(); //To get the day (Today)
+					Date today = Date.valueOf(now); //today day
+					if(endDate.before(today)) //verify if the endDate is before
+					{
+						int day = (int) ((today.getTime() - endDate.getTime()) / 86400000); //to know how many day are between
+						alert = new Alert(AlertType.CONFIRMATION, "Su multa es de: $" + day*FINE_PER_DAY); //show the alert
+						alert.showAndWait();
+						
+					}
+					objectList.remove(position); //remove the loan from the list
 					verify = true;
+					break;
 				}
 			}
-			if (verify == false)
+			if (verify == false) //if the loan is not found
 			{
 				alert = new Alert(AlertType.ERROR, "No se encuentra prestamo");
 				alert.showAndWait();
 			}
-			else
+			else //if it is found call the method to save the changes
 			{
+				EditInformation information = new EditInformation();
+				information.addAvailableQuantity(material, "Material.ser"); //Call the method to add one to the available quantity
 				file.writeArray("Loan.ser", objectList);
 			}
 			
@@ -198,24 +214,24 @@ public class ControlLoan implements Initializable, IConstant
 	 * Author: Danny Xie Li
 	 * Description: The next method check student if the student exits in the register.
 	 * Created: 1/03/18
-	 * Last modification: 1/03/18
+	 * Last modification: 03/03/18 by Esteban Coto Alfaro
 	 * @throws ClassNotFoundException 
 	 */
 	public void checkStudent() throws ClassNotFoundException
 	{
-		String name = main_txt_registerLoan_studentName.getText().toString();
-		String id = main_txt_registerLoan_idStudent.getText().toString();
-		boolean condition = true;
+		String name = main_txt_registerLoan_studentName.getText().toString(); //read the namee of the student
+		String id = main_txt_registerLoan_idStudent.getText().toString(); //read the id of the student
+		boolean condition = true; 
 		ControlFile file = new ControlFile();
-		ArrayList<Object> objectList = file.readFile("Student.ser");
-		for(int position = 0; position < objectList.size(); position++)
+		ArrayList<Object> objectList = file.readFile("Student.ser"); //charge the arrayList from thee file
+		for(int position = 0; position < objectList.size(); position++) //search the student
 		{
 			if(((Student)objectList.get(position)).getName().toString().equals(name) && ((Student)objectList.get(position)).getLicense().toString().equals(id))
 			{	
 				condition = false;
 			}
 		}
-		if(condition == false)
+		if(condition == false) //if the student is founded
 		{
 			materialData = FXCollections.observableArrayList();
 			ControlFile control = new ControlFile(); //ControlFile constructor to call functions of that class
@@ -227,20 +243,19 @@ public class ControlLoan implements Initializable, IConstant
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			for(int position = 0; position < materialList.size(); position++)
+			for(int position = 0; position < materialList.size(); position++)//get the name of each material
 			{
 				materialData.add(((Material)materialList.get(position)));
 			}
-			System.out.println(materialData.size());
 			main_col_registerLoan_nameColumn.setCellValueFactory(cellData->new SimpleStringProperty((cellData.getValue()).getName()));
 			main_tbt_registerLoan_tableName.setItems(materialData);
 			main_tbt_registerLoan_tableName.getSelectionModel().selectedItemProperty().addListener(
 		            (observable, oldValue, newValue) -> selectItem((Material) newValue));
-			setVisibleMaterialElement(false);
+			setVisibleMaterialElement(false); //set the visibility 
 		}
 		else
 		{
-			setVisibleMaterialElement(true);
+			setVisibleMaterialElement(true); 
 		}
 	}
 	

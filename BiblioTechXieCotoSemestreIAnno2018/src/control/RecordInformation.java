@@ -17,7 +17,6 @@ import domain.Person;
 import domain.Student;
 import exception.CodeBookException;
 import file.ControlFile;
-import file.Writer;
 
 public class RecordInformation
 {
@@ -69,24 +68,5 @@ public class RecordInformation
 	{
 		ControlFile controlFile = new ControlFile();
 		controlFile.writeFile(pFile, pObject);
-	}
-	
-	/* 
-	 * Created: 02/25/2018
-	 * Author: Esteban Coto Alfaro
-	 * Description: Make a return of a material
-	 * Last modification: 02/26/2018 
-	 */
-	public void makeReturn(String pName, String pLicense, String pMaterialName) throws FileNotFoundException, ClassNotFoundException, ParseException
-	{
-		GetInformation info = new GetInformation(); //Constructor to access all the information
-		Student studentObject = (Student) info.getStudentInfo(pName, pLicense); //Get the student object
-		Material materialObject = (Material) info.getMaterialInfo(pMaterialName, "Material.ser"); //Get the material object
-		LoanControl loan = new LoanControl(); //Constructor for the loan control
-		boolean boolResult = loan.verifyInformation(studentObject, materialObject); //Verify if the information exists
-		if(boolResult == true)
-		{
-			loan.makeAReturn(studentObject, materialObject); //Call the return method from Loan class
-		}
 	}
 }
