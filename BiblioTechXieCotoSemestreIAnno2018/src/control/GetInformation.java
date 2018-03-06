@@ -22,7 +22,7 @@ public class GetInformation
 	{
 		ArrayList<Administrator> admiList = new ArrayList<Administrator>(); //Would store an arayList with all the saved objects
 		Reader reader = new Reader(); //constructor to call readAdministrator function
-		Administrator admi = new Administrator(); //Administrator object
+		Administrator admi; //Administrator object
 		admi = null;
 		admiList = reader.readAdministrator(); //call the method to read the administrator file
 		for(int position = 0; position < admiList.size(); position++) //Analyze every register form the arrayList
