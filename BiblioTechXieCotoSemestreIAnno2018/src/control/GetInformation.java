@@ -16,7 +16,8 @@ public class GetInformation
 	 * Created: 02/25/2018
 	 * Author: Esteban Coto Alfaro
 	 * Description: Get an administrator object by receiving username and password
-	 * Last modification: 02/25/2018 
+	 * Last modification: 03/06/2018
+	 * Modificated by: Danny Xie Li
 	 */
 	public Administrator getAdmiInfo(String pUsername, String pPassword) throws FileNotFoundException, ClassNotFoundException
 	{
